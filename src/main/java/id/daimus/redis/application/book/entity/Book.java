@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class Book {
     @Id
-    private String id;
+    private Long id;
     @NotBlank(message = "isbn can not blank")
     private String isbn;
     @NotBlank(message = "title can not blank")

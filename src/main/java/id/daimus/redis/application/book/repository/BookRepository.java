@@ -9,7 +9,7 @@ import java.util.List;
 @Validated
 public interface BookRepository {
     List<Book> findAll();
-    Book findById(String id);
+    Book findById(Long id);
     Book save(@Valid Book book);
-    boolean deleteById(String id);
+    boolean deleteById(Long id);
 }

@@ -6,6 +6,7 @@ import id.daimus.redis.infrastructure.presenter.rest.Response;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,7 @@ public class BookController {
         return response.getResponse();
     }
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Object> getBook(@PathVariable String id){
+    public ResponseEntity<Object> getBook(@PathVariable Long id){
         log.info("GET /books/{id} called");
         Response response = new Response();
         Book book = bookService.getBook(id);
@@ -45,7 +46,7 @@ public class BookController {
         return response.getResponse();
     }
     @PatchMapping(path = "/{id}")
-    public ResponseEntity<Object> updateBook(@PathVariable String id, @RequestBody Book book){
+    public ResponseEntity<Object> updateBook(@PathVariable Long id, @RequestBody Book book){
         log.info("GET /books/{id} called");
         Response response = new Response();
         book = bookService.saveBook(id, book);
@@ -53,7 +54,7 @@ public class BookController {
         return response.getResponse();
     }
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Object> deleteBook(@PathVariable String id){
+    public ResponseEntity<Object> deleteBook(@PathVariable Long id){
         log.info("GET /books/{id} called");
         Response response = new Response();
         bookService.deleteBook(id);

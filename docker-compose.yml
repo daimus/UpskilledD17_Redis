@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  book_service:
+    image: 'book-service'
+    container_name: book_service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8081:8080'
+    depends_on:
+      - book_postgres
+      - book_redis
+    links:
+      - book_postgres
+      - book_redis
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://book_postgres:5432/book_db
+      - SPRING_DATASOURCE_USERNAME=book_user
+      - SPRING_DATASOURCE_PASSWORD=5F2912FF85AF4EA851E252A161DD2
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=org.postgresql.Driver
+      - SPRING_DATA_REDIS_HOST=book_redis
+      - SPRING_DATA_REDIS_PORT=6379
+      - SERVER_PORT=8080
+
+  book_redis:
+    container_name: book_redis
+    image: 'redislabs/redismod:latest'
+    ports:
+      - '6380:6379'
+
+  book_postgres:
+    container_name: book_postgres
+    image: 'postgres:13'
+    environment:
+      - POSTGRES_USER=book_user
+      - POSTGRES_PASSWORD=5F2912FF85AF4EA851E252A161DD2
+      - POSTGRES_DB=book_db
+    ports:
+      - '5433:5432'

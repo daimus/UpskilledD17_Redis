@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  book_service:
+    image: 'book-service'
+    container_name: book_service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8081:8080'
+    depends_on:
+      - book_redis
+    links:
+      - book_redis
+    environment:
+      - SPRING_DATA_REDIS_HOST=book_redis
+      - SPRING_DATA_REDIS_PORT=6379
+      - SERVER_PORT=8080
+
+  book_redis:
+    container_name: book_redis
+    image: 'redislabs/redismod:latest'
+    ports:
+      - '6380:6379'

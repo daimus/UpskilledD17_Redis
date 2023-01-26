@@ -1,11 +1,11 @@
-# Day 17 - Redis
+# Day 17 - Redis (Redis as Cache, Postgres SQL as Primary Database)
 
 ## Problem 1 - Buat REST API ✅
 
 ### Criteria
 1. Menggunakan redis sebagai media penyimpanan ✅
-    - Redis sebagai media penyimpanan primer 
-    - Redis sebagai cache
+    - Redis sebagai media penyimpanan primer [main](https://github.com/daimus/UpskilledD17_Redis)
+    - Redis sebagai cache, Postgres sebagai media penyimpanan primer [redis-cache](https://github.com/daimus/UpskilledD17_Redis/tree/redis-cache)
 2. Menerapkan fitur autentikasi ✅
 
 | Username | Password |
